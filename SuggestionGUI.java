@@ -61,26 +61,32 @@ public class SuggestionGUI extends JFrame
         greatExpectationsArea.setWrapStyleWord(true);
         add(greatExpectationsArea);
         
-        // MODIFICATION: THREE BUTTON OUTPUT
-        // Adding buttons directly below each text area. When clicked, they 
-        // pull the current text and save it to a mashup story file.
+        // MODIFICATION: THREE BUTTON OUTPUT (Refactored)
+        // Individual buttons save to their respective novel logs.
         JButton btnFrankenstein = new JButton("Save Frankenstein Snippet");
         btnFrankenstein.setBounds(10, 245, 250, 30);
         btnFrankenstein.addActionListener(e -> 
-            appendToMashup(frankensteinArea.getText()));
+            saveIndividual("Frankenstein", frankensteinArea.getText()));
         add(btnFrankenstein);
 
         JButton btnMobyDick = new JButton("Save Moby Dick Snippet");
         btnMobyDick.setBounds(10, 465, 250, 30);
         btnMobyDick.addActionListener(e -> 
-            appendToMashup(mobyDickArea.getText()));
+            saveIndividual("MobyDick", mobyDickArea.getText()));
         add(btnMobyDick);
 
-        JButton btnGreatExpectations = new JButton("Save Great Exp. Snippet");
-        btnGreatExpectations.setBounds(10, 685, 250, 30);
-        btnGreatExpectations.addActionListener(e -> 
-            appendToMashup(greatExpectationsArea.getText()));
-        add(btnGreatExpectations);
+        JButton btnGreatExp = new JButton("Save Great Exp. Snippet");
+        btnGreatExp.setBounds(10, 685, 250, 30);
+        btnGreatExp.addActionListener(e -> 
+            saveIndividual("GreatExpectations", 
+                           greatExpectationsArea.getText()));
+        add(btnGreatExp);
+
+        // Dedicated Mashup button to combine all three text areas
+        JButton btnMashup = new JButton("Save Mashup Snippet");
+        btnMashup.setBounds(10, 725, 250, 30);
+        btnMashup.addActionListener(e -> saveMashup());
+        add(btnMashup);
 
         setSize(840, 840); // set size of window
         setVisible(true);  // show window
@@ -100,22 +106,39 @@ public class SuggestionGUI extends JFrame
         thread3.start();
     }
 
-    // Helper method for the THREE BUTTON OUTPUT modification.
-    // Appends the current search term and the suggested text to a file.
-    // Opens the file in "append" mode (true) so data isn't overwritten.
-    private void appendToMashup(String suggestionText) {
-        if (suggestionText == null || suggestionText.trim().isEmpty()) {
+    // Save individual novel to its own specific file
+    private void saveIndividual(String novelName, String text) {
+        if (text == null || text.trim().isEmpty()) {
             return; // Prevent saving empty blanks to the file
         }
-        try (FileWriter fw = new FileWriter("MashupStory.txt", true);
+        
+        String fileName = novelName + "_Log.txt";
+        
+        try (FileWriter fw = new FileWriter(fileName, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             
             out.println("Prompt: " + enterField.getText());
-            out.println("Snippet: " + suggestionText);
+            out.println("Snippet: " + text);
             out.println("--------------------------------------------------");
         } catch (IOException ex) {
-            System.out.println("Error writing to MashupStory.txt");
+            System.out.println("Error saving " + novelName);
+        }
+    }
+
+    // The "Mashup" button calls this to grab all three areas at once
+    private void saveMashup() {
+        try (FileWriter fw = new FileWriter("MashupStory.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+             
+            out.println("--- Full Mashup: " + enterField.getText() + " ---");
+            out.println("Frankenstein: " + frankensteinArea.getText());
+            out.println("Moby Dick: " + mobyDickArea.getText());
+            out.println("Great Exp: " + greatExpectationsArea.getText());
+            out.println("==================================================");
+        } catch (IOException ex) {
+            System.out.println("Error saving mashup");
         }
     }
 }
