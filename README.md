@@ -34,8 +34,8 @@ Custom implementation of a threaded autocomplete engine for classic literature.
 ## Timeline
 - Codebase finalized: 07/15/2026
 - GitHub repository creation: 07/16/2026-9:30AM
-- Testing Started: 07/16/2026-9:40am
-- Testing Findings: 07/16/2026 9:45am
+- Testing Started: 07/16/2026-9:40AM
+- Testing Findings: 07/16/2026 9:45AM
 - SuggestionGUI updated as well tested: 07/16/2026-10:41AM
 
 *All code manually reviewed and documented with internal citations.*
