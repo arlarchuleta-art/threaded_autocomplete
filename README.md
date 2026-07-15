@@ -30,12 +30,18 @@ Custom implementation of a threaded autocomplete engine for classic literature.
 - **Usability Issue:** Individual log files do not state the novel name *inside* the text document itself, which could lead to confusion if text is copied out of the file.
 - **Resolution Plan:** Update `saveIndividual` method to print the novel name inside the file before the prompt and snippet.
 
-  
+## Test 3 Findings
+- **Status:** Export logic refined.
+- **Verification:** Verified that each `_Log.txt` file now explicitly states the "Novel: [Name]" at the start of the snippet.
+- **New Issue Identified:** The GUI currently uses `setLayout(null)`, which prevents the window from resizing when corners are dragged.
+- **Resolution Plan:** Refactor GUI to use a responsive Layout Manager (BoxLayout) to allow for window resizing.
+- 
 ## Timeline
 - Codebase finalized: 07/15/2026
 - GitHub repository creation: 07/16/2026-9:30AM
 - Testing Started: 07/16/2026-9:40AM
 - Testing Findings: 07/16/2026 9:45AM
 - SuggestionGUI updated as well tested: 07/16/2026-10:41AM
-
+- Novel Verification: 07/16/2026-4:11PM
+  
 *All code manually reviewed and documented with internal citations.*
