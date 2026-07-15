@@ -18,7 +18,7 @@ Custom implementation of a threaded autocomplete engine for classic literature.
     - 'Break Between Words' and 'Multiword Match' search enhancements.
     - 'Three Button Output' export capability.
     - 
-### Test 1 
+## Test 1 
 - **Status:** Functional baseline established.
 - **Verification:** Multi-threading and autocomplete triggers verified via Test 1 screenshot.
 - **Usability Issue:** Individual "Save" buttons are correctly appending to `MashupStory-1st test.txt`, but this lacks granular control for the user.
