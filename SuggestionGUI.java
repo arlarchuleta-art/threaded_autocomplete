@@ -118,6 +118,8 @@ public class SuggestionGUI extends JFrame
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             
+            // Injects the novel name into the text file directly
+            out.println("Novel: " + novelName);
             out.println("Prompt: " + enterField.getText());
             out.println("Snippet: " + text);
             out.println("--------------------------------------------------");
