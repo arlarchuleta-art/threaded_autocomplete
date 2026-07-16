@@ -35,7 +35,13 @@ Custom implementation of a threaded autocomplete engine for classic literature.
 - **Verification:** Verified that each `_Log.txt` file now explicitly states the "Novel: [Name]" at the start of the snippet.
 - **New Issue Identified:** The GUI currently uses `setLayout(null)`, which prevents the window from resizing when corners are dragged.
 - **Resolution Plan:** Refactor GUI to use a responsive Layout Manager (BoxLayout) to allow for window resizing.
-  
+
+## Test 4 & 5 Findings (UI Polish)
+- **Status:** Layout refined and stabilized.
+- **Verification:** GUI now correctly resizes dynamically while retaining the original aesthetic.
+- **Modifications:** Implemented `BoxLayout` with `EmptyBorder` and `LineBorder` to restore visual depth.
+- **Verification:** Individual logs successfully inject novel identification markers.
+-   
 ## Timeline
 - Codebase finalized: 07/15/2026
 - GitHub repository creation: 07/16/2026-9:30AM
@@ -43,5 +49,6 @@ Custom implementation of a threaded autocomplete engine for classic literature.
 - Testing Findings: 07/16/2026 9:45AM
 - SuggestionGUI updated as well tested: 07/16/2026-10:41AM
 - Novel Verification: 07/16/2026-4:11PM
+- UI Polish: 07/16/2025-6:30PM
   
 *All code manually reviewed and documented with internal citations.*
