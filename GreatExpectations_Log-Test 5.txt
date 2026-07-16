@@ -1,0 +1,4 @@
+Novel: GreatExpectations
+Prompt: rest
+Snippet:  rest of what I have to say, to you.
+--------------------------------------------------

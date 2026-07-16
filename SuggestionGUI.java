@@ -11,6 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import java.awt.Component;
 
 //Extra imports for improved interface readability
 import java.awt.Font;
@@ -32,64 +37,85 @@ public class SuggestionGUI extends JFrame
     {
         super("Autocomplete from novels");
         
-        setLayout(null);
+        // Use a JPanel as the main container to easily apply a border
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        // This restores the 10px margin around the entire application
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setContentPane(mainPanel);
         
         enterField = new JTextField("Enter text here");
         enterField.setFont(new Font("Serif", Font.PLAIN, 32));
         enterField.setBackground(Color.blue);
         enterField.setForeground(Color.yellow);
-        enterField.setBounds(10,10,800,60);
-        add(enterField);
+        enterField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(enterField);
+        
+        mainPanel.add(Box.createVerticalStrut(10)); // Gap below input field
         
         // Initializing the text areas and positioning them on the GUI
-        // Heights slightly reduced to 160 to make room for the EC buttons
-        frankensteinArea = new JTextArea();
-        frankensteinArea.setBounds(10, 80, 800, 160);
+        frankensteinArea = new JTextArea(5, 50);
         frankensteinArea.setLineWrap(true);
         frankensteinArea.setWrapStyleWord(true);
-        add(frankensteinArea);
+        // Restores the visual box around the text area
+        frankensteinArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        frankensteinArea.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(frankensteinArea);
         
-        mobyDickArea = new JTextArea();
-        mobyDickArea.setBounds(10, 300, 800, 160);
-        mobyDickArea.setLineWrap(true);
-        mobyDickArea.setWrapStyleWord(true);
-        add(mobyDickArea);
-        
-        greatExpectationsArea = new JTextArea();
-        greatExpectationsArea.setBounds(10, 520, 800, 160);
-        greatExpectationsArea.setLineWrap(true);
-        greatExpectationsArea.setWrapStyleWord(true);
-        add(greatExpectationsArea);
+        mainPanel.add(Box.createVerticalStrut(5)); // Gap below text area
         
         // MODIFICATION: THREE BUTTON OUTPUT (Refactored)
-        // Individual buttons save to their respective novel logs.
         JButton btnFrankenstein = new JButton("Save Frankenstein Snippet");
-        btnFrankenstein.setBounds(10, 245, 250, 30);
+        btnFrankenstein.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnFrankenstein.addActionListener(e -> 
             saveIndividual("Frankenstein", frankensteinArea.getText()));
-        add(btnFrankenstein);
+        mainPanel.add(btnFrankenstein);
 
+        mainPanel.add(Box.createVerticalStrut(15)); // Gap before next section
+
+        mobyDickArea = new JTextArea(5, 50);
+        mobyDickArea.setLineWrap(true);
+        mobyDickArea.setWrapStyleWord(true);
+        mobyDickArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        mobyDickArea.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(mobyDickArea);
+        
+        mainPanel.add(Box.createVerticalStrut(5)); 
+        
         JButton btnMobyDick = new JButton("Save Moby Dick Snippet");
-        btnMobyDick.setBounds(10, 465, 250, 30);
+        btnMobyDick.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnMobyDick.addActionListener(e -> 
             saveIndividual("MobyDick", mobyDickArea.getText()));
-        add(btnMobyDick);
+        mainPanel.add(btnMobyDick);
 
+        mainPanel.add(Box.createVerticalStrut(15));
+
+        greatExpectationsArea = new JTextArea(5, 50);
+        greatExpectationsArea.setLineWrap(true);
+        greatExpectationsArea.setWrapStyleWord(true);
+        greatExpectationsArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        greatExpectationsArea.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(greatExpectationsArea);
+        
+        mainPanel.add(Box.createVerticalStrut(5));
+        
         JButton btnGreatExp = new JButton("Save Great Exp. Snippet");
-        btnGreatExp.setBounds(10, 685, 250, 30);
+        btnGreatExp.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnGreatExp.addActionListener(e -> 
             saveIndividual("GreatExpectations", 
                            greatExpectationsArea.getText()));
-        add(btnGreatExp);
+        mainPanel.add(btnGreatExp);
+
+        mainPanel.add(Box.createVerticalStrut(5));
 
         // Dedicated Mashup button to combine all three text areas
         JButton btnMashup = new JButton("Save Mashup Snippet");
-        btnMashup.setBounds(10, 725, 250, 30);
+        btnMashup.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnMashup.addActionListener(e -> saveMashup());
-        add(btnMashup);
+        mainPanel.add(btnMashup);
 
-        setSize(840, 840); // set size of window
-        setVisible(true);  // show window
+        setSize(850, 900); 
+        setVisible(true);  
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // Creating background threads for each novel, passing the input field
