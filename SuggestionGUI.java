@@ -155,18 +155,19 @@ public class SuggestionGUI extends JFrame
     }
 
     // The "Mashup" button calls this to grab all three areas at once
-    private void saveMashup() {
-        try (FileWriter fw = new FileWriter("MashupStory.txt", true);
-             BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter out = new PrintWriter(bw)) {
-             
-            out.println("--- Full Mashup: " + enterField.getText() + " ---");
-            out.println("Frankenstein: " + frankensteinArea.getText());
-            out.println("Moby Dick: " + mobyDickArea.getText());
-            out.println("Great Exp: " + greatExpectationsArea.getText());
-            out.println("==================================================");
-        } catch (IOException ex) {
-            System.out.println("Error saving mashup");
+        private void saveMashup() {
+            try (FileWriter fw = new FileWriter("MashupStory.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw)) {
+                
+                out.println("--- Full Mashup ---");
+                out.println("Prompt: " + enterField.getText()); // Added prompt line
+                out.println("Frankenstein: " + frankensteinArea.getText());
+                out.println("Moby Dick: " + mobyDickArea.getText());
+                out.println("Great Exp: " + greatExpectationsArea.getText());
+                out.println("==================================================");
+            } catch (IOException ex) {
+                System.out.println("Error saving mashup");
+            }
         }
-    }
 }
